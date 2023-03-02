@@ -48,14 +48,28 @@ public class JdbcServlet extends HttpServlet{
 		String departmentId = req.getParameter("departmentId");
 		
 		
-		out.print("사원번호 : "+result.get("id")+"<br>");
-		out.print("이름 : "+result.get("firstName")+" &nbsp");
-		out.print(result.get("lastName")+"<br>");
-		out.print("급여 : "+result.get("salary")+"<br>");
-		out.print("부서 : "+result.get("departmentId")+"<br>");
+//		out.print("사원번호 : "+result.get("id")+"<br>");
+//		out.print("이름 : "+result.get("firstName")+" &nbsp");
+//		out.print(result.get("lastName")+"<br>");
+//		out.print("급여 : "+result.get("salary")+"<br>");
+//		out.print("부서 : "+result.get("departmentId")+"<br>");
+		
+		String html = "<html><head><title>Header 정보</title></head>";
+		html += "<body>";
+		html += "<p>사원번호 : "+result.get("id")+"<br>";
+		html += "이름 : "+result.get("firstName")+" &nbsp";
+		html += result.get("lastName")+"<br>";
+		html += "급여 : "+result.get("salary")+"<br>";
+		html += "부서 : "+result.get("departmentId")+"<br>";
+		
+		html += "</body></html>";
+		
+		
+		out.print(html);
 		
 		out.print("<a href='temp.html'>조회-등록으로 이동</a>");
 		out.close();
+		
 		
 	}
 }
