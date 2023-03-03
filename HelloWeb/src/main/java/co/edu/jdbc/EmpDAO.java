@@ -16,7 +16,6 @@ public class EmpDAO {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection(url,"hr","hr");
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -47,5 +46,27 @@ public class EmpDAO {
 		}
 		return result;
 		
+	}
+	
+	//단건 등록.
+	public int insertEmp(Map<String, Object> map) {
+		connect();
+		String sql = "insert into employees(employee_id, email, hire_date, job_id, last_name)\r\n"
+				+ "values (?,?,?,?,?)";
+		try {
+			PreparedStatement psmt = conn.prepareStatement(sql);
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, (String) map.get("eid"));
+			psmt.setString(2, (String) map.get("email"));
+			psmt.setString(3, (String) map.get("hire"));
+			psmt.setString(4, (String) map.get("job"));
+			psmt.setString(5, (String) map.get("last"));
+			int r = psmt.executeUpdate(); //insert,update,delete
+			
+			return r;//처리된 건수 반환 (1건)
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 }
