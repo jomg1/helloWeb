@@ -22,7 +22,7 @@ public class FrontController extends HttpServlet{
 		//회원목록
 		map.put("/memberList.do", new MemberListControl());
 		//사원목록
-		//map.put("/empList.do", new EmpListControl()); //member/empList.jsp
+		map.put("/empList.do", new EmpListControl()); //member/empList.jsp
 	}
 	
 	@Override
