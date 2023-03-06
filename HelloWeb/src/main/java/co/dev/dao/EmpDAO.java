@@ -16,13 +16,13 @@ public class EmpDAO extends DAO{
 				psmt = conn.prepareStatement(sql);
 				rs = psmt.executeQuery();
 				while(rs.next()) {
-					EmpVO vo = new EmpVO();
-					vo.setId(rs.getInt("employees_id"));
-					vo.setLastName(rs.getString("Last_name"));
-					vo.SetSalary(rs.getInt("salary"));
-					vo.setDepartmentId(rs.getInt("department_id"));
+//					EmpVO vo = new EmpVO();
+//					vo.setId(rs.getInt("employees_id"));
+//					vo.setLastName(rs.getString("Last_name"));
+//					vo.SetSalary(rs.getInt("salary"));
+//					vo.setDepartmentId(rs.getInt("department_id"));
 					
-					empList.add(vo);
+//					empList.add(vo);
 					
 				}
 		} catch(Exception e) {
