@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="co.dev.mapper.MemberMapper">
+<!-- id:메소드 이름 resultType:반환되는 타입 위치도 함께 작성 -->
+  <select id="getMembers" resultType="co.dev.vo.MemberVO">
+    select * from members order by id desc
+  </select>
+</mapper>

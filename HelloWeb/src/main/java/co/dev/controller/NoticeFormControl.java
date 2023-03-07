@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import co.dev.common.Control;
 
-public class MemberUpdateFormControl implements Control {
+public class NoticeFormControl implements Control {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
-		//해당 페이지를 열어줌
+		// TODO Auto-generated method stub
 		try {
-			req.getRequestDispatcher("WEB-INF/notice/memberUpdate.jsp").forward(req, resp);
+			req.getRequestDispatcher("WEB-INF/notice/noticeForm.jsp").forward(req, resp);
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
