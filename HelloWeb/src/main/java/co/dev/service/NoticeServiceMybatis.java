@@ -35,6 +35,20 @@ public class NoticeServiceMybatis implements NoticeService{
 		mapper.updateCount(nid);//조회수 증가
 		return mapper.selectNotice(nid);
 	}
+	@Override
+	public int getTotalCount() {
+		return mapper.getTotalCount(); //전체 건수 가져오는 메소드
+	}
+	@Override
+	public boolean noiceModify(NoticeVO vo) {
+		int r = mapper.updateNotice(vo); //수정
+		return r == 1;
+	}
+	@Override
+	public int noticeRemove(int nid) {
+		return mapper.noticeRemove(nid);
+	}
+	
 	
 	
 

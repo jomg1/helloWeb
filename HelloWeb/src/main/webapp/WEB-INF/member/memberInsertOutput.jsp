@@ -8,7 +8,7 @@
 	Object obj = request.getAttribute("message");// Object 타입으로 반환
 	//어떤 유형의 타입이라도 받아오기 위해 Object 타입으로 반환
 	String result = (String) obj;
-	String id = (String) request.getAttribute("id");//String
+	//String id = (String) request.getAttribute("id");//String
 	%>
 	<p>처리결과: <%=result %></p>
 	<p><%=id %> 님의 가입을 환영합니다!</p>

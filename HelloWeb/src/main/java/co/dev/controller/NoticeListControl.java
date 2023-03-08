@@ -11,6 +11,7 @@ import co.dev.common.Control;
 import co.dev.service.NoticeService;
 import co.dev.service.NoticeServiceMybatis;
 import co.dev.vo.NoticeVO;
+import co.dev.vo.PageDTO;
 
 public class NoticeListControl implements Control {
 
@@ -27,8 +28,10 @@ public class NoticeListControl implements Control {
 		//mybatis-config.xml에 매퍼 파일 등록
 		NoticeService service = new NoticeServiceMybatis();
 		List<NoticeVO> list = service.noticeList(Integer.parseInt(page));// 공지사항 목록
+		int total = service.getTotalCount();
 		
 		req.setAttribute("list", list); //list 객체의 정보를 "list"라는 이름으로 넘겨줌
+		req.setAttribute("page", new PageDTO(Integer.parseInt(page), total)); 
 		
 		try {
 			req.getRequestDispatcher("WEB-INF/notice/noticeList.jsp").forward(req, resp);

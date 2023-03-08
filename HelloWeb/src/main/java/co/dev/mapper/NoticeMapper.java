@@ -12,5 +12,8 @@ public interface NoticeMapper {
 	public int insertNotice(NoticeVO vo); //insert,update,delete는 반환값1이 될 수 있게 int타입
 	public NoticeVO selectNotice(int nid);//단건조회
 	public int updateCount(int nid); //조회수 증가
+	public int getTotalCount();
+	public int updateNotice(NoticeVO vo); //수정
+	public int noticeRemove(int nid);//삭제
 	
 }

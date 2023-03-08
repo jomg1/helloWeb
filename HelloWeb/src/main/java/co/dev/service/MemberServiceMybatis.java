@@ -41,5 +41,10 @@ public class MemberServiceMybatis implements MemberService {
 	public boolean removeMember(String id) {
 		return false;
 	}
+
+	@Override
+	public MemberVO login(MemberVO vo) {
+		return mapper.login(vo);
+	}
 	
 }
