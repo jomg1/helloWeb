@@ -13,9 +13,9 @@
    <!-- 크다 작다 연산자를 사용하려면 CDATA 안에 쿼리문 넣어줌 -->
   <select id="noticeListWithPaging" resultType="co.dev.vo.NoticeVO" parameterType="int">
 	  <![CDATA[
-		select notice_id, notice_writer, notice_title, create_date
-		from(select rownum rn, notice_id, notice_writer, notice_title, create_date
-		from(select notice_id, notice_writer, notice_title, create_date
+		select notice_id, notice_writer, notice_title, create_date, hit_count
+		from(select rownum rn, notice_id, notice_writer, notice_title, create_date, hit_count
+		from(select notice_id, notice_writer, notice_title, create_date, hit_count
 			 from notice
 			 order by notice_id desc) a
 			 where rownum <= (#{page} * 10)) b

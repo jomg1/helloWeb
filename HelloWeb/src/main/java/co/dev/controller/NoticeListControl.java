@@ -30,7 +30,7 @@ public class NoticeListControl implements Control {
 		List<NoticeVO> list = service.noticeList(Integer.parseInt(page));// 공지사항 목록
 		int total = service.getTotalCount();
 		
-		req.setAttribute("list", list); //list 객체의 정보를 "list"라는 이름으로 넘겨줌
+		req.setAttribute("list", list); //list 객체의 정보를 "list"라는 이름으로 넘겨줌, list 컬렉션
 		req.setAttribute("page", new PageDTO(Integer.parseInt(page), total)); 
 		
 		try {

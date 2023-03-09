@@ -3,8 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-	<%@ include file="../includes/sidebar.jsp" %>
-	<%@ include file="../includes/top.jsp" %>
+<jsp:include page="../includes/sidebar.jsp"></jsp:include>
+<jsp:include page="../includes/top.jsp"></jsp:include>
 	
 	<%
 	// 자바 영역
@@ -15,7 +15,8 @@
 		<thead>
 		<tr><th>id</th><th>Name</th><th>Pass</th><th>Mail</th></tr>	
 		</thead>
-		<tbody>
+		<tbody>		
+		
 	<%
 		for (MemberVO member : list){
 			
@@ -32,4 +33,4 @@
 	<p>회원등록페이지 이동</p>
 	<a href="memberInsertForm.do">회원등록페이지</a>
 	
-	<%@ include file="../includes/footer.jsp" %>
+<jsp:include page="../includes/footer.jsp"></jsp:include>

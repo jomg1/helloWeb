@@ -1,51 +1,51 @@
 <%@page import="co.dev.vo.NoticeVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ include file="../includes/sidebar.jsp" %>
-<%@ include file="../includes/top.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%
-  NoticeVO vo = (NoticeVO) request.getAttribute("notice");
-%>
+<jsp:include page="../includes/sidebar.jsp"></jsp:include>
+<jsp:include page="../includes/top.jsp"></jsp:include>
+
+<!-- ${notice } --> <!-- NoticeVO가 넘어옴 -->
 
    <table class="table">
     <tr>
       <td>글번호</td>
-      <td><input type="text" name="nid" readonly value="<%=vo.getNoticeId()%>"></td>
-      <td>조회수 [<b><%=vo.getHitCount() %></b>] </td> 
+      <td><input type="text" name="nid" readonly value="${notice.noticeId }"></td>
+      <td>조회수 [<b>${notice.hitCount}</b>] </td> 
     </tr>
     <tr>
       <td>제목</td>
-      <td colspan=2><input type="text" name="title" value="<%=vo.getNoticeTitle()%>"></td>
+      <td colspan=2><input type="text" name="title" value="${notice.noticeTitle }"></td>
     </tr>
        <tr>
       <td>작성자</td>
-      <td colspan=2><input type="text" name="writer" readonly value="<%=vo.getNoticeWriter()%>"></td>
+      <td colspan=2><input type="text" name="writer" readonly value="${notice.noticeWriter }"></td>
     </tr>
     <tr>
       <td>내용</td>
-      <td colspan=2><textarea cols="30" rows="5" name="subject"><%=vo.getNoticeSubject() %></textarea></td>
+      <td colspan=2><textarea cols="30" rows="5" name="subject">${notice.noticeSubject}</textarea></td>
     </tr>
     <tr>
       <td>파일</td>
       <td>
-      <% if(vo.getAttach() != null) { %>
-      <input type="text" name="attach" value="<%=vo.getAttach() %>">
-      <%} else{ %>
-      <input type="text" name="attach">
-      <%} %>
+      <c:choose>
+        <c:when test="${notice.attach != null }">
+          <input type="text" name="attach" value="${notice.attach }">
+        </c:when>
+        <c:otherwise>
+          <input type="text" name="attach">
+        </c:otherwise>
+      </c:choose>
+
       </td>
     </tr>
     <tr>
       <td colspan="2" align="center">
-      <%
-       String lid = (String) session.getAttribute("id");
-      %>
-      <%if(id!=lid){ %>
+
         <button id = "modBtn">수정</button>
         <button id="delBtn">삭제</button>
-        <%} %>
+
         </td>
     </tr>
   </table>
@@ -83,4 +83,4 @@
   </script>
 
 
-<%@ include file="../includes/footer.jsp" %>
+<jsp:include page="../includes/footer.jsp"></jsp:include>
