@@ -30,7 +30,7 @@
     <jsp:include page="../includes/header.jsp"></jsp:include>
 
     <!-- Main Content-->
-    <form action ="bookAddForm.do" method="post">
+    <form action ="bookAdd.do" method="post">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-12 col-lg-10 col-xl-8">
