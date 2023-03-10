@@ -42,11 +42,11 @@
                         </tr>
                         <tr>
                             <td>저자</td>
-                            <td><input type="text" name="bookTitle"></td>
+                            <td><input type="text" name="bookAuthor"></td>
                         </tr>
                         <tr>
                             <td>도서명</td>
-                            <td><input type="text" name="bookAuthor"></td>
+                            <td><input type="text" name="bookTitle"></td>
                         </tr>
                         <tr>
                             <td>출판사</td>

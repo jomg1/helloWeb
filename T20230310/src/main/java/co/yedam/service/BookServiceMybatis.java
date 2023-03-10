@@ -26,7 +26,7 @@ public class BookServiceMybatis implements BookService {
 
 	@Override
 	public BookVO getBookInfo(String bookCode) { //조회.
-		return null;
+		return mapper.selectBook(bookCode);
 	}
 
 }

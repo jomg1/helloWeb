@@ -11,4 +11,9 @@
 <insert id="insertBook" parameterType="co.yedam.vo.BookVO">
 	insert into book values(#{bookCode}, #{bookTitle}, #{bookAuthor}, #{bookPress},#{bookDesc},#{bookPrice}) 
 </insert>
+
+<select id="selectBook" resultType="co.yedam.vo.BookVO" parameterType="String">
+select * from book where book_code= #{bookCode}
+</select>
+
 </mapper>
