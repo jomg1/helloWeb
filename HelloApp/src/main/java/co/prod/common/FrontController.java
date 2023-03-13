@@ -11,10 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.prod.controller.MemberAddAjax;
+import co.prod.controller.MemberListAjax;
 import co.prod.controller.MemberListControl;
 import co.prod.controller.MembersControl;
 import co.prod.controller.ProductInfoControl;
 import co.prod.controller.ProductListControl;
+import co.prod.controller.memberRemoveAjax;
 
 public class FrontController extends HttpServlet{
 
@@ -28,16 +31,23 @@ public class FrontController extends HttpServlet{
 		// url <-> control 객체 값을 넣어주는 기능 구현
 		map.put("/memberList.do", new MemberListControl());
 		map.put("/members.do", new MembersControl());
+		// Ajax 호출(SPA 처리)
+		map.put("/memberListAjax.do", new MemberListAjax());
+		map.put("/memberRemoveAjax.do", new memberRemoveAjax());
+		map.put("/memberAddAjax.do", new MemberAddAjax());
 		
 		// 상품목록. (프로그램 만들 때 순서 목록, 등록, 수정 순서로 만들어보기)
 		map.put("/productList.do", new ProductListControl());
 		// 상품한건정보
 		map.put("/productInfo.do", new ProductInfoControl());
+
 	}
 	
 	@Override
 	//실제 실행되는 기능은 service에
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		req.setCharacterEncoding("utf-8");
 		String uri = req.getRequestURI();
 //		System.out.println(uri); //헷갈리면 로그 찍어서 확인해보기
 		String context = req.getContextPath();
@@ -55,6 +65,10 @@ public class FrontController extends HttpServlet{
 			viewPage = "/WEB-INF/views/" + viewPage;
 //		} else if (viewPage.endsWith(".titles")) {
 //			viewPage = "/" + viewPage;
+		} else if(viewPage.endsWith(".ajax")) {
+			resp.setContentType("text/json;charset=utf-8");
+			resp.getWriter().append(viewPage.substring(0, viewPage.length()-5));
+			return; // 해당 메소드를 끝냄.
 		}
 		// 페이지를 재지정(이동시켜줌)
 		RequestDispatcher rd = req.getRequestDispatcher(viewPage);
