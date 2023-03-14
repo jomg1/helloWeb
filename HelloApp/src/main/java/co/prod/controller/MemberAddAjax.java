@@ -35,7 +35,7 @@ public class MemberAddAjax implements Control {
 		String json = "";
 		
 		if(result) {
-			map.put("retCode", "success");
+			map.put("retCode", "Success");
 			map.put("member", vo);
 		}else {
 			map.put("retCode", "Fail");
