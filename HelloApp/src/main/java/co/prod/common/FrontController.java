@@ -17,6 +17,9 @@ import co.prod.controller.MemberListControl;
 import co.prod.controller.MembersControl;
 import co.prod.controller.ProductInfoControl;
 import co.prod.controller.ProductListControl;
+import co.prod.controller.ReplyAddAjax;
+import co.prod.controller.ReplyListAjax;
+import co.prod.controller.ReplyRemoveAjax;
 import co.prod.controller.memberRemoveAjax;
 
 public class FrontController extends HttpServlet{
@@ -40,6 +43,15 @@ public class FrontController extends HttpServlet{
 		map.put("/productList.do", new ProductListControl());
 		// 상품한건정보
 		map.put("/productInfo.do", new ProductInfoControl());
+		
+		//상품 댓글 정보 목록
+		map.put("/replyListAjax.do", new ReplyListAjax());
+		//상품 댓글 삭제
+		map.put("/replyRemoveAjax.do", new ReplyRemoveAjax());
+		//상품 댓글 등록
+		map.put("/replyAddAjax.do", new ReplyAddAjax());
+		//
+		
 
 	}
 	

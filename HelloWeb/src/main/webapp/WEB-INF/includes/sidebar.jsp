@@ -19,11 +19,11 @@
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light">Start Bootstrap</div>
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberList.do">회원목록보기</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberInsertForm.do">회원등록페이지</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberSearchForm.do">회원조회</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="noticeList.do">공지사항목록</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="noticeWriteForm.do">공지사항등록</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#">회원정보확인</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#">장바구니</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#">예약정보</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#">상품구매내역</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#">쿠폰함</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">쪽지함</a>
                 </div>
             </div>

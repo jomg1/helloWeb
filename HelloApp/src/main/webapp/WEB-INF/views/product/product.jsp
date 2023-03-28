@@ -25,6 +25,156 @@
                 </div>
             </div>
         </section>
+        
+        <input type="text" id="writer" value="user02">
+        <input type="text" id="content">
+        <button id="addContent">댓글등록</button>
+        <br>
+        
+          <table class="table">
+        	<thead>
+        	  <tr>
+        	    <th>댓글번호</th>
+        	    <th>작성자</th>
+        	    <th>댓글내용</th>
+        	    <th>삭제</th>
+        	  </tr>
+        	</thead>
+        	<tbody id="list">
+        	  <!-- <tr>
+        	     <td>1</td>
+        	    <td>user01</td>
+        	    <td>reply test</td>
+        	    <td><button>삭제</button></td>
+        	  </tr>-->
+        	</tbody>
+          </table>
+          
+          <script>
+            //목록데이터
+            //let promiseResult = fetch('')
+            //promiseResult.then(function(){});
+            fetch('replyListAjax.do?code=CF0001') //json 문자열 반환
+            //.then(function (resolve){
+            //	return resolve.json();
+            //})
+            .then(resolve => resolve.json()) //[{"id:":"user1","name":"hong"}]->자바스크립트 object[{id:'user1',name:'hong'}]
+            .then(result => {
+            	console.log(result); //result는 배열을 의미
+            	//값을 이용해서 tr 생성
+            	result.forEach(function(reply){
+            		makeRow(reply)
+            	});
+            })
+            .catch(reject => console.log(reject));
+            
+            let showProps = ['replyNo','replyWriter','replyContent'];
+            function makeRow(reply={}) { //reply={} object가 들어오겠다는 의미
+            	//tr>td*4
+            	let tr = document.createElement('tr');
+            	//tr에 이벤트 달기
+            	tr.addEventListener('dblclick',modifyTr);
+                tr.id = reply.replyNo; //tr의 attribute에 아이디 값을 부여(댓글번호), setAttribute도 동일
+            	showProps.forEach(function(prop){//shwProps를 반복해서 돌리겠다는 뜻
+            		let td = document.createElement('td');
+            		td.innerText = reply[prop]; //console.log(reply[prop]);
+            		tr.append(td);
+            	})
+            	let td = document.createElement('td');
+            	let btn = document.createElement('button');
+            	btn.addEventListener('click', removeReply);//삭제처리 기능 부여 (이벤트 유형, 함수) //removeReply()하면 이벤트 발생 전에 함수가 실행되어버림
+                btn.innerText='삭제';
+                td.append(btn);
+                tr.append(td);
+                
+                document.querySelector('#list').append(tr);//tr을 tbody의 하위요소로 붙여줌
+            }
+            
+            function modifyTr(){
+            	console.log(this);
+            	let oldTr = this;
+            	let data = {replyNo: 6, replyWriter: 'user04', replyContent:'reply test01'};//서버에서 가지고 온 값
+            	
+            	let newTr = document.createElement('tr');
+            	let td = document.createElement('td');
+            	td.innerText = data.replyNo;
+            	newTr.append(td);
+            	
+            	td = document.createElement('td');
+            	td.innerText = data.replyWriter;
+            	newTr.append(td);
+            	
+            	td = document.createElement('td');
+            	let input = document.createElement('input');
+            	input.value = data.replyContent; // input태그는 innerText아닌 value 속성 사용
+            	td.append(input);
+            	newTr.append(td);
+            	
+            	td = document.createElement('td');
+            	let btn = document.createElement('button');
+            	btn.innerText = '저장';
+            	td.append(btn);
+            	newTr.append(td);
+            	
+            	
+            	console.log(newTr);
+            	document.getElementById('list').replaceChild(newTr, oldTr);
+            }
+            
+            //댓글번호() 데이터를 삭제하는 기능(컨트롤) + 화면에서도 삭제(elem.remove())
+            function removeReply(){
+            	console.log(this.parentElement.parentElement.id); // this 키워드: event에 등록된 콜백 함수일 경우, 이벤트를 받는 대상
+            	let id = this.parentElement.parentElement.id;
+            	
+            	fetch('replyRemoveAjax.do?replyId='+id) //get방식
+            	.then(resolve => resolve.json()) //리턴값을 자바스크립트의 오브젝트 타입으로 바꿈
+            	.then(result => {//retCode의 값이 넘어옴
+            		console.log(result);
+            	if (result.retCode == 'Success'){
+            		alert('성공');
+            		document.getElementById(id).remove();
+            	}else if (result.retCode == 'Fail'){
+            		alert('실패');
+            	}else{
+            		alert('retCode값을 확인해주세요!')
+            	}
+            	})
+            	.catch(reject => console.error(reject)); //console.log는 까맣게 나옴 error는 빨갛게 나옴
+            }
+            
+            // 댓글 등록
+            document.querySelector('#addContent').addEventListener('click',addReply);//요소를 찾아오는 방식 중 하나 querySelector
+            
+            function addReply(){
+            	// writer, content의 value.(input태그에는 값을 입력한 정보들이 value 속성에 들어있음)
+            	let writer = document.querySelector('#writer').value;
+            	let content = document.querySelector('#content').value;
+            	
+            	//post방식으로 넘기는 방법. 객체를 넘겨준다 (자바스크립트에서는 중괄호가 객체)
+            	fetch('replyAddAjax.do',{
+            		method: 'post',
+            		headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
+            		body: 'writer='+writer+'&content='+content+'&pcode=CF0001'
+            	})
+            	.then(resolve => resolve.json())
+            	.then(result =>{
+            		console.log(result);
+            		if(result.retCode == 'Success'){
+            			alert('성공');
+            			makeRow(result.reply);
+            		}else if(result.retCode == 'Fail'){
+            			alert('실패');
+            		}else{
+            			alert("retCode를 확인하세요.")
+            		}
+            	})
+            	.catch(reject => console.error(reject))
+            }
+            
+            
+           
+          </script>
+          
         <!-- Related items section-->
         <section class="py-5 bg-light">
             <div class="container px-4 px-lg-5 mt-5">

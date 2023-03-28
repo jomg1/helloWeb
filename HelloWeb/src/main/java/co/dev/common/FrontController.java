@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.dev.controller.LoginControl;
 import co.dev.controller.LoginFormControl;
 import co.dev.controller.LogoutControl;
 import co.dev.controller.MainControl;

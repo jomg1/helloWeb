@@ -1,4 +1,4 @@
-package co.dev.common;
+package co.dev.controller;
 
 import java.io.IOException;
 
