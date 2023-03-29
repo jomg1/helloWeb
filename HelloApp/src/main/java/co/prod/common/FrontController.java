@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.prod.controller.ChartAjax;
+import co.prod.controller.ChartControl;
 import co.prod.controller.MemberAddAjax;
 import co.prod.controller.MemberListAjax;
 import co.prod.controller.MemberListControl;
@@ -19,7 +21,9 @@ import co.prod.controller.ProductInfoControl;
 import co.prod.controller.ProductListControl;
 import co.prod.controller.ReplyAddAjax;
 import co.prod.controller.ReplyListAjax;
+import co.prod.controller.ReplyModifyAjax;
 import co.prod.controller.ReplyRemoveAjax;
+import co.prod.controller.ReplySearchAjax;
 import co.prod.controller.memberRemoveAjax;
 
 public class FrontController extends HttpServlet{
@@ -44,15 +48,19 @@ public class FrontController extends HttpServlet{
 		// 상품한건정보
 		map.put("/productInfo.do", new ProductInfoControl());
 		
-		//상품 댓글 정보 목록
+		// 상품 댓글 정보 목록
 		map.put("/replyListAjax.do", new ReplyListAjax());
-		//상품 댓글 삭제
+		// 상품 댓글 삭제
 		map.put("/replyRemoveAjax.do", new ReplyRemoveAjax());
-		//상품 댓글 등록
+		// 상품 댓글 등록
 		map.put("/replyAddAjax.do", new ReplyAddAjax());
-		//
-		
-
+		// 상품 댓글 번호 조회
+		map.put("/replySearchAjax.do", new ReplySearchAjax());
+		// 상품 댓글 수정
+		map.put("/replyModifyAjax.do", new ReplyModifyAjax());
+		//차트
+		map.put("/chart.do", new ChartControl());
+		map.put("/chartAjax.do", new ChartAjax());
 	}
 	
 	@Override
@@ -61,7 +69,6 @@ public class FrontController extends HttpServlet{
 		
 		req.setCharacterEncoding("utf-8");
 		String uri = req.getRequestURI();
-//		System.out.println(uri); //헷갈리면 로그 찍어서 확인해보기
 		String context = req.getContextPath();
 		String page = uri.substring(context.length());
 		System.out.println("do page: " + page); // 확인용
