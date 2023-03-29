@@ -29,6 +29,9 @@ public class ReplyModifyAjax implements Control {
 		vo.setReplyContent(content);
 		
 		boolean result = service.modifyReply(vo);
+		
+		vo = service.getReply(Integer.parseInt(no));
+		
 		Map<String, Object> resultMap = new HashMap<>();
 		
 		if(result) {
