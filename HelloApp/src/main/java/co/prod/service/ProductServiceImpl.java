@@ -9,6 +9,7 @@ import co.prod.common.DataSource;
 import co.prod.mapper.ProductMapper;
 import co.prod.vo.ProductVO;
 import co.prod.vo.ReplyVO;
+import co.prod.vo.ScheduleVO;
 
 public class ProductServiceImpl implements ProductService{
 	
@@ -54,6 +55,20 @@ public class ProductServiceImpl implements ProductService{
 	public List<Map<String, Object>> chartInfo() {
 		return mapper.chartInfo();
 	}
+
+	@Override
+	public List<ScheduleVO> secheduleList() {
+		return mapper.selectSchedule();
+	}
+
+	@Override
+	public boolean addSchedule(ScheduleVO vo) {
+		return mapper.insertSchedule(vo)==1;
+	}
+
+	
+	
+	
 
 
 	

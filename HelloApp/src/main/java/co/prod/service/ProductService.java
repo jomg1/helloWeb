@@ -5,6 +5,7 @@ import java.util.Map;
 
 import co.prod.vo.ProductVO;
 import co.prod.vo.ReplyVO;
+import co.prod.vo.ScheduleVO;
 
 public interface ProductService {
 	//리스트 출력
@@ -24,4 +25,9 @@ public interface ProductService {
 	
 	//chart
 	public List<Map<String, Object>> chartInfo();
+	//schedule 목록 출력
+	
+	public List<ScheduleVO> secheduleList ();
+	//schedule 추가
+	public boolean addSchedule(ScheduleVO vo);
 }

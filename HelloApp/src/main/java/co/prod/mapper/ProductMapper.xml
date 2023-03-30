@@ -46,4 +46,14 @@
 	on e.department_id = d.department_id
 	group by department_name
   </select>
+  
+  <select id="selectSchedule" resultType="ScheduleVO">
+    select * from full_calendar
+  </select>
+  
+  <insert id="insertSchedule" parameterType="ScheduleVO">
+    insert into full_calendar
+    values (#{title}, #{startDate}, #{endDate})
+  </insert>
+  
 </mapper>

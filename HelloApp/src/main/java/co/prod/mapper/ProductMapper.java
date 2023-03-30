@@ -5,6 +5,7 @@ import java.util.Map;
 
 import co.prod.vo.ProductVO;
 import co.prod.vo.ReplyVO;
+import co.prod.vo.ScheduleVO;
 
 public interface ProductMapper {
 	//목록
@@ -25,4 +26,9 @@ public interface ProductMapper {
 	
 	//chart 부서별 인원현황
 	public List<Map<String, Object>> chartInfo();
+	
+	//캘린더- 스케줄 출력
+	public List<ScheduleVO> selectSchedule();
+	//캘린더 - 스케줄 추가
+	public int insertSchedule(ScheduleVO vo);
 }

@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import co.prod.controller.ChartAjax;
 import co.prod.controller.ChartControl;
+import co.prod.controller.CovidForm;
+import co.prod.controller.FullControl;
+import co.prod.controller.MapForm;
 import co.prod.controller.MemberAddAjax;
 import co.prod.controller.MemberListAjax;
 import co.prod.controller.MemberListControl;
@@ -24,6 +27,8 @@ import co.prod.controller.ReplyListAjax;
 import co.prod.controller.ReplyModifyAjax;
 import co.prod.controller.ReplyRemoveAjax;
 import co.prod.controller.ReplySearchAjax;
+import co.prod.controller.ScheduleAddAjax;
+import co.prod.controller.ScheduleAjax;
 import co.prod.controller.memberRemoveAjax;
 
 public class FrontController extends HttpServlet{
@@ -58,9 +63,21 @@ public class FrontController extends HttpServlet{
 		map.put("/replySearchAjax.do", new ReplySearchAjax());
 		// 상품 댓글 수정
 		map.put("/replyModifyAjax.do", new ReplyModifyAjax());
-		//차트
+		//chart
 		map.put("/chart.do", new ChartControl());
+		// chart 데이터
 		map.put("/chartAjax.do", new ChartAjax());
+		// covid
+		map.put("/covid19.do", new CovidForm());
+		// map api
+		map.put("/map.do", new MapForm());
+		// fullcaleandar api
+		map.put("/fullcalendar.do", new FullControl());
+		// 일정 데이터
+		map.put("/schedule.do", new ScheduleAjax());
+		// 일정 추가
+		map.put("/scheduleAdd.do", new ScheduleAddAjax());
+		
 	}
 	
 	@Override
