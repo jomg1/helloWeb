@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery/basic.html</title>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
+    <!--제이쿼리 라이브러리가 없으면 $사인이 먹히지 않음-->
+    <!-- <script src="./jquery-3.6.4.min.js"></script> -->
+    <!--Using jQuery with a CDN 사용도 가능 (jquery 홈페이지)-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script>
+
+        // this: (객체: 객체자신, 함수: 전역객체(window), 이벤트: event.target(이벤트 받는 대상))
+        // $() => jquery 객체: 메소드(함수)기반으로 움직임
+        // 자바스크립트: 객체(Document Object Model) : document.children, document.querySelector()(메소드)
+        // window.document
+        console.log(document);
+        console.log($(document)); //jquery객체로 변경시킨 document ,jquery객체는 jquery의 모든 함수 사용 가능
+        $(document).ready(function(){//document 이벤트에 걸려있는 함수
+
+        });
+
+        function callWindow(){
+            console.log(this); // window객체(전역객체)
+        }
+        callWindow();
+
+        let obj = { //obj내의 this 키워드는 자기 자신(obj)를 가리킴
+            name:"홍길동",
+            age:20,
+            showAge: function(){
+                console.log("이름은 " + this.name +", 나이는 " + this.age);
+            }
+        }
+        obj.showAge();
+
+        $(document).ready(function () { // == $(function()
+            console.log(this); // window(함수 안이기 때문) -> document(document에 ready(또는 on) 이벤트 속성의 함수이므로 this는 document)
+            console.log(document.querySelectorAll('p:nth-of-type(2)')); //자바스크립트 객체 요소 찾아오기
+            //자바스크립트 querySelector는 요소 하나만 가지고 옴
+            //여러개를 가지고 오려면 querySelectorAll => NodeList로 보여줌
+            console.log($("p:eq(0)")); // jquery 객체의 모습, eq는 이퀄 , p:eq(0) = 배열0번의 요소를 가지고오겠다
+
+            $("p").on("click", function () { //$("p")라는 요소를 찾아오겠다는 의미 , .on => 이벤트를 등록하는 메소드
+            //jquery는 console로 확인 시 배열 안에 객체를 넣어둠
+                $(this).css("color", "red"); // style {'font':bold, 'color': 'red','back'}
+                //.css style 적용할 때 사용하는 메소드
+                });
+            //자바스크립트로 변경 시
+            //document.querySelectorAll('p').forEach(function (pTag){
+            //   pTag.addEventListener('click',function(){
+            //        pTag.style.color = 'red';
+            //    })
+            //});
+        });
+    </script>
+</head>
+
+<body>
+    <p>이제부터 제이쿼리를 다 같이 공부해보죠!!<br>
+        마우스로 글씨를 클릭해보세요!!</p>
+    <p>2번째 p태그</p>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>basic2.html</title>
+    <script src="./jquery-3.6.4.min.js"></script>
+    <script>
+        // page 컨텐츠 다운로드 된 다음 script 실행
+        //따옴표는 '',"" 모두 가능
+        // document.addEventListener('DOMContentLoaded', function(){ //자바스크립트- 페이지 로딩 후 코드 실행
+            $(document).ready(function(){
+            // 자바스크립트 elem.innerHTML = '<ul id="list"><li>Apple</li></ul>'
+            $('div#show').html('<ul id="list"><li>Apple</li></ul>'); //함수이므로 ()로 묶어주는것이 가장 큰 차이점
+
+            // createElement
+            //let li = $('<li />').text('Banana').css('color','red'); //메소드를 체인 방식으로 연결 가능
+            let li = $('<li>Banana</li>')
+                .css('color','red')
+                .attr('class','important');
+            // li.text('Banana'); // innerText
+            console.log(li);
+            $('#list').append(li);
+            $('#list').append($('<li>Cherry</li>'),
+                              $('<li />').text('Melon'),
+                              $('<li />').text('Grape').on('click', function(){alert('clicked')})
+             );
+            //jquery 선택자 (TCP School->jquery->3-7)제이쿼리선택자 참고)
+             $('li:eq(3)').css('background-color','yellow');//추가적인 요소를 추가하고싶을 때 eq
+             $('li:gt(2)').css('font-size', 'small');
+             $('li:not(:eq(0))').css('font-style', 'italic');
+             $('li:contains(Melon)').css('font-weight','bold');
+
+             //input
+             $('input:text').val('user01');
+             $('input[type="email"]').css('background-color', 'yellow').val('email');
+        })
+    </script>
+</head>
+
+<body>
+    <div id="show">
+        <!-- 
+        <ul>
+            <li>Apple</li>
+            <li>Banana</li>
+            <li>Cherry</li>
+        </ul> 
+    -->
+    </div>
+
+    <form action="">
+      Id: <input type="text" name="" id=""><br>
+      Pw: <input type="password" name="" id=""><br>
+      Mail: <input type="email" name="" id=""><br>
+    </form>
+
+
+</body>
+
+</html>
