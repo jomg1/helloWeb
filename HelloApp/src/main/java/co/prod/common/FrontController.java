@@ -29,6 +29,7 @@ import co.prod.controller.ReplyRemoveAjax;
 import co.prod.controller.ReplySearchAjax;
 import co.prod.controller.ScheduleAddAjax;
 import co.prod.controller.ScheduleAjax;
+import co.prod.controller.ScheduleRemoveAjax;
 import co.prod.controller.memberRemoveAjax;
 
 public class FrontController extends HttpServlet{
@@ -77,6 +78,8 @@ public class FrontController extends HttpServlet{
 		map.put("/schedule.do", new ScheduleAjax());
 		// 일정 추가
 		map.put("/scheduleAdd.do", new ScheduleAddAjax());
+		// 일정 삭제
+		map.put("/scheduleRemove.do", new ScheduleRemoveAjax());
 		
 	}
 	

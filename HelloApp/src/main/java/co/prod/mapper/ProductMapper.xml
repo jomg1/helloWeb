@@ -56,4 +56,8 @@
     values (#{title}, #{startDate}, #{endDate})
   </insert>
   
+  <delete id="deleteSchedule" parameterType="ScheduleVO">
+    delete from full_calendar where title = #{title} and start_date = #{startDate} and end_date = #{endDate}
+  </delete>
+  
 </mapper>

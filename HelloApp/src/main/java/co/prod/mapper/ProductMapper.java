@@ -31,4 +31,6 @@ public interface ProductMapper {
 	public List<ScheduleVO> selectSchedule();
 	//캘린더 - 스케줄 추가
 	public int insertSchedule(ScheduleVO vo);
+	//캘린더 - 스케줄 삭제
+	public int deleteSchedule(ScheduleVO vo);
 }

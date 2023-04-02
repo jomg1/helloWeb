@@ -26,8 +26,9 @@ public interface ProductService {
 	//chart
 	public List<Map<String, Object>> chartInfo();
 	//schedule 목록 출력
-	
 	public List<ScheduleVO> secheduleList ();
 	//schedule 추가
 	public boolean addSchedule(ScheduleVO vo);
+	//schedule 삭제
+	public boolean removeSchedule(ScheduleVO vo);
 }

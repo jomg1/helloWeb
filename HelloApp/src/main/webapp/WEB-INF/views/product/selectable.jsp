@@ -62,6 +62,17 @@
       eventClick: function(arg) {
         if (confirm('이벤트를 삭제하시겠습니까?')) {
           arg.event.remove()
+          console.log(arg.event);
+          fetch('scheduleRemove.do',{
+        	  method: 'post',
+        	  headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        	  body: 'title='+arg.event.title+'&start='+arg.event.startStr+'&end='+arg.event.endStr
+          }) 
+          .then(reslove => resolve.json())
+          .then(result => {
+        	  console.log(result)
+          })
+          //.catch(reject -> console.error(reject))
         }
       },
       editable: true,
