@@ -3,6 +3,7 @@ package co.prod.mapper;
 import java.util.List;
 
 import co.prod.vo.MemberVO;
+import co.prod.vo.MembersVO;
 
 
 
@@ -18,4 +19,12 @@ public interface MemberMapper {
 	
 	// 회원등록
 	public int insertMember(MemberVO vo);
+	
+	//매퍼 membersList
+	public List<MembersVO> membersList();
+	//members 추가
+	public int insertMembers(MembersVO vo);
+	//members 삭제
+	public int deleteMembers(List<MembersVO> list);
+
 }

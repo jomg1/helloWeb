@@ -17,11 +17,16 @@ import co.prod.controller.CovidForm;
 import co.prod.controller.FullControl;
 import co.prod.controller.MapForm;
 import co.prod.controller.MemberAddAjax;
+import co.prod.controller.MemberAddJquery;
+import co.prod.controller.MemberJquery;
 import co.prod.controller.MemberListAjax;
 import co.prod.controller.MemberListControl;
+import co.prod.controller.MemberListJquery;
+import co.prod.controller.MemberRemoveJquery;
 import co.prod.controller.MembersControl;
 import co.prod.controller.ProductInfoControl;
 import co.prod.controller.ProductListControl;
+import co.prod.controller.ProductListjquery;
 import co.prod.controller.ReplyAddAjax;
 import co.prod.controller.ReplyListAjax;
 import co.prod.controller.ReplyModifyAjax;
@@ -48,6 +53,18 @@ public class FrontController extends HttpServlet{
 		map.put("/memberListAjax.do", new MemberListAjax());
 		map.put("/memberRemoveAjax.do", new memberRemoveAjax());
 		map.put("/memberAddAjax.do", new MemberAddAjax());
+		
+		// jquery용 ajax
+		map.put("/memberJquery.do", new MemberJquery());
+		// 목록을 가지고 오도록. memberListJquery.do
+		map.put("/memberListJquery.do", new MemberListJquery());
+		// members 추가 jquery
+		map.put("/memberAddJquery.do", new MemberAddJquery());
+		// members 삭제 jquery
+		map.put("/memberRemoveJquery.do", new MemberRemoveJquery());
+		
+		
+		map.put("/productInfo.do", new ProductListjquery());
 		
 		// 상품목록. (프로그램 만들 때 순서 목록, 등록, 수정 순서로 만들어보기)
 		map.put("/productList.do", new ProductListControl());
@@ -80,6 +97,7 @@ public class FrontController extends HttpServlet{
 		map.put("/scheduleAdd.do", new ScheduleAddAjax());
 		// 일정 삭제
 		map.put("/scheduleRemove.do", new ScheduleRemoveAjax());
+		
 		
 	}
 	

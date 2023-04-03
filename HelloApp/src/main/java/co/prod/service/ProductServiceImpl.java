@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import co.prod.common.DataSource;
 import co.prod.mapper.ProductMapper;
+import co.prod.vo.MembersVO;
 import co.prod.vo.ProductVO;
 import co.prod.vo.ReplyVO;
 import co.prod.vo.ScheduleVO;
@@ -71,6 +72,9 @@ public class ProductServiceImpl implements ProductService{
 		return mapper.deleteSchedule(vo)==1;
 	}
 
+	
+
+	
 	
 	
 	

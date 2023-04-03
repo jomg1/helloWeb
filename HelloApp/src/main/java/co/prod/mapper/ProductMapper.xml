@@ -60,4 +60,6 @@
     delete from full_calendar where title = #{title} and start_date = #{startDate} and end_date = #{endDate}
   </delete>
   
+
+  
 </mapper>

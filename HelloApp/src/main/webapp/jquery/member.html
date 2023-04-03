@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.6.4.min.js"></script>
+    <script>
+        //document 로딩 후 처리
+        $(document).ready(function () {
+            // fetch('url',{option})
+            // 목록 출력 ajax
+            $.ajax({
+
+                url: "data.json", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
+                data: {
+                    name: "홍길동", // request.getParameter('name'); 파라미터 정보
+                    id: 'user01' // request.getParameter('id');
+                }, // HTTP 요청과 함께 서버로 보낼 데이터
+                method: "GET", // HTTP 요청 방식(GET, POST)
+                dataType: "json", // 서버에서 보내줄 데이터의 타입: JSON.parse()실행
+                success: function (result) { // 서버요청의 성공시 실행.
+                    //JSON.parse(result); // jason 타입으로 parsing해줌
+                    console.log(result);
+                    $(result).each(function (idx, member) { // index, member요소의 값을 하나씩 담아두는 변수
+                        console.log(idx, member);
+                        $('#list').append(
+                            //tr>td*4 생성
+                            $('<tr />').append($('<td />').text(member.memberId),
+                                $('<td />').text(member.memberName),
+                                $('<td />').text(member.memberAddr),
+                                $('<td />').text(member.memberTel),
+                                $('<td />').text(member.memberPw),
+                                $('<td />').append($('<button />').text('삭제').on(
+                                    'click', rowDeleteFnc)),
+                                $('<td />').append($('<input />').attr('type', 'checkbox')) //아래와 같음
+                            )
+                        );
+
+                    });
+                },
+                error: function (err) { // 서버요청의 실패시 실행.
+                    console.error(err);
+                }
+
+            }) // $.ajax()
+
+            // 추가버튼 이벤트 & 이벤트 핸들러
+            $('#addBtn').on('click', function (e) {
+                e.preventDefault();//전송기능 차단
+                $('#list').append(
+                    //tr>td*4 생성
+                    $('<tr />').append($('<td />').text($('#id').val()),
+                        $('<td />').text($('#name').val()),
+                        $('<td />').text($('#addr').val()),
+                        $('<td />').text($('#tel').val()),
+                        $('<td />').text($('#passwd').val()),
+                        $('<td />').append($('<button />').text('삭제').on(
+                            'click', rowDeleteFnc)),
+                        $('<td />').append($('<input type="checkbox" />'))
+                    )
+                );
+
+            })
+
+            // 전체선택 / 전체해제
+            $('th>input[type="checkbox"]').on('change', function(){//값이 바뀌면 발생하는 이벤트 체크박스의 경우 click보다 change가 적합한 듯
+                //attr() => html, prop() => DOM 속성 //TCPSchool 프로퍼티 설정 참고
+                //$('td>input').attr('checked', 'checked') // attr로 하면 checked 동시에 하는게 불가능 prop 사용이 더 나음
+                //attr은 id값을 주는 경우로 많이 사용됨
+                //$('td>input').attr('id',344)
+                //true, false 값을 주어야 할 경우는 prop 사용이 더 나음
+                //console.log(this);
+                //console.log(this.value);
+                $('td>input').prop({
+                    checked: this.checked // this.value 아닌 checked
+                })
+            })
+
+            // th>input 과 td>input을 비교해서 전체선택이 되도록
+            // 선택된 갯수를 비교?
+            $('td>input[type="checkbox"]').on('change',function(){
+                
+            })
+
+            // 선택삭제버튼 이벤트 핸들러
+            $('#delSelected').on('click', function(e){
+                e.preventDefault();
+                //console.log($('#list input:checked').closest('tr'));
+                //console.log($('#list input:checked'))
+                //$('#list input:checked').parentsUntil('tbody').remove(); //가능
+                $('#list input:checked').each(function(idx, item){
+                    //$(item).parent().parent().remove();
+                    //item은 input 태그
+                    $(item).closest('tr').remove(); //가장 가까운 요소를 지운다
+                })
+            })
+
+
+            // 삭제버튼 이벤트 핸들러
+            function rowDeleteFnc() {
+                //parentsUntil - 조상요소 가지고 올 때 선택자에 해당하는 요소의 전까지의 요소 여기서는 tr
+                //parent.parent 해도 무관
+                $(this).parentsUntil('tbody').remove();
+            }
+
+        });
+    </script>
+</head>
+
+<body>
+    <div>
+        <form>
+            <table class="table" border="1">
+                <tr>
+                    <td>Id:</td>
+                    <td><input type="text" id="id"></td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" id="name"></td>
+                </tr>
+                <tr>
+                    <td>Pass:</td>
+                    <td><input type="text" id="passwd"></td>
+                </tr>
+                <tr>
+                    <td>Addr:</td>
+                    <td><input type="text" id="addr"></td>
+                </tr>
+                <tr>
+                    <td>Tel:</td>
+                    <td><input type="text" id="tel"></td>
+                </tr>
+                <tr>
+                    <td colspan='2' align="center">
+                        <button id="addBtn">등록</button>
+                        <button id="delSelected">선택삭제</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div>
+        <table class="table" border="1">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Pass</th>
+                    <th>주소</th>
+                    <th>연락처</th>
+                    <th>삭제</th>
+                    <th><input type="checkbox"></th>
+                </tr>
+            </thead>
+            <tbody id="list">
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

@@ -21,5 +21,23 @@
     insert into members (id, name, passwd, mail, auth)
     values(#{id}, #{name}, #{passwd}, #{mail}, #{auth})
   </insert>
+  
+  <!-- members 리스트 출력 -->
+  <select id="membersList" resultType="MembersVO">
+    select * from members
+  </select>
+  
+  <insert id="insertMembers" parameterType="MembersVO">
+    insert into members
+    values (#{memberId}, #{memberName}, #{memberAddr}, #{memberTel}, #{memberPw})
+  </insert>
+  
+  <update id="deleteMembers" parameterType="MembersVO">
+  <!-- opne에 delete from members를 where 앞에 넣어도 됨 -->
+  delete from members
+    <foreach collection="list" item="item" open=" where member_id in(" close=")" separator=",">
+	  #{item.memberId}
+	  </foreach>
+  </update>
 
 </mapper>

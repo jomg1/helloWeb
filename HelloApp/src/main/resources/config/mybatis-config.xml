@@ -20,6 +20,7 @@
     <typeAlias type="co.prod.vo.ProductVO" alias="ProductVO"/>
     <typeAlias type="co.prod.vo.ReplyVO" alias="ReplyVO"/>
     <typeAlias type="co.prod.vo.ScheduleVO" alias="ScheduleVO"/>
+    <typeAlias type="co.prod.vo.MembersVO" alias="MembersVO"/>
   </typeAliases>
   
   

@@ -3,6 +3,7 @@ package co.prod.mapper;
 import java.util.List;
 import java.util.Map;
 
+import co.prod.vo.MembersVO;
 import co.prod.vo.ProductVO;
 import co.prod.vo.ReplyVO;
 import co.prod.vo.ScheduleVO;
@@ -33,4 +34,6 @@ public interface ProductMapper {
 	public int insertSchedule(ScheduleVO vo);
 	//캘린더 - 스케줄 삭제
 	public int deleteSchedule(ScheduleVO vo);
+	
+	
 }
