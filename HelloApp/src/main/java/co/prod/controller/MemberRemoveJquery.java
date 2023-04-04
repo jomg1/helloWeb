@@ -15,13 +15,19 @@ public class MemberRemoveJquery implements Control {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse response) {
-//		MemberService service = new MemberServiceMybatis();
 //		List<MembersVO> list = new ArrayList<>();
 		
 		String[] members = req.getParameterValues("memberId");
 		for (String member : members)
 		System.out.println(members);
-		return null;
+
+		MemberService service = new MemberServiceMybatis();
+		
+		service.removeMembersAry(members);
+		
+		String json = "{\"retCode\":\"Success\"}";
+		
+		return json + ".ajax";
 	}
 
 }

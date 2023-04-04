@@ -29,8 +29,8 @@
                         console.log(idx, member);
                         $('#list').append(
                             //tr>td*4 생성
-                            $('<tr id =' + member.memberId + '/>').append($('<td />').text(member.memberId),
-                                $('<td />').text(member.memberName),
+                            $('<tr id=' + member.memberId + ' />').append($('<td />').text(member.memberId),//id= 에서 띄어쓰기 하면 안 됨!!                           
+                            	$('<td />').text(member.memberName),
                                 $('<td />').text(member.memberAddr),
                                 $('<td />').text(member.memberTel),
                                 $('<td />').text(member.memberPw),
@@ -76,9 +76,9 @@
 				                    //tr>td*4 생성
 				                    $('<tr />').append($('<td />').text($('#id').val()),
 				                        $('<td />').text($('#name').val()),
+				                        $('<td />').text($('#passwd').val()),
 				                        $('<td />').text($('#addr').val()),
 				                        $('<td />').text($('#tel').val()),
-				                        $('<td />').text($('#passwd').val()),
 				                        $('<td />').append($('<button />').text('삭제').on(
 				                            'click', rowDeleteFnc)),
 				                        $('<td />').append($('<input type="checkbox" />'))
@@ -135,8 +135,8 @@
             // 선택삭제버튼 이벤트 & 이벤트 핸들러
             $('#delSelected').on('click', function(e){
                 e.preventDefault();
-                let memberIdAry = {}
-                //console.log($('#list input:checked').closest('tr'));
+                let memberIdAry = '';// memberId=user01&memberId=user02&memberId=user03
+                console.log($('#list input:checked').closest('tr'));
                 //console.log($('#list input:checked'))
                 //$('#list input:checked').parentsUntil('tbody').remove(); //가능
                 $('#list input:checked').each(function(idx, item){
@@ -146,6 +146,7 @@
                 	//$(item).parent().parent().remove();
                     //item은 input 태그
                     //$(item).closest('tr').remove(); //가장 가까운 요소를 지운다
+                    memberIdAry += '&memberId=' + $(item).parent().parent().attr('id');
                 })
                 console.log(memberIdAry);
                 
@@ -153,9 +154,12 @@
                 $.ajax({
                 	url:'memberRemoveJquery.do',//호출할 컨트롤
                 	method:'post',
-                	data: {memberId:'user01', memberId:'user02'}, //memberId=user01&memberId=user02
+                	data: memberIdAry.substring(1), //memberId=user01&memberId=user02
                 	success: function (result) {
-                		
+                		if(result.retCode == 'Success')
+                		$('#list input:checked').closest('tr').remove();
+                		else
+                			alert('error!!');
                 	},
                 	error: function (reject) {
                 		console.log(reject)

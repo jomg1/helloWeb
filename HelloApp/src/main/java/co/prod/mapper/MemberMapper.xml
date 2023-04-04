@@ -32,12 +32,36 @@
     values (#{memberId}, #{memberName}, #{memberAddr}, #{memberTel}, #{memberPw})
   </insert>
   
-  <update id="deleteMembers" parameterType="MembersVO">
+   <update id="deleteMembers" parameterType="MembersVO">
   <!-- opne에 delete from members를 where 앞에 넣어도 됨 -->
   delete from members
     <foreach collection="list" item="item" open=" where member_id in(" close=")" separator=",">
 	  #{item.memberId}
 	  </foreach>
   </update>
+  
+  <update id="deleteMembersAry" parameterType="String">
+  <!-- opne에 delete from members를 where 앞에 넣어도 됨 -->
+  delete from members
+    <foreach collection="array" item="member" open=" where member_id in(" close=")" separator=",">
+	  #{member}
+	  </foreach>
+  </update>
+  
+  <select id="selectEmployees" resultType="co.prod.vo.EmpVO">
+    select * from employees order by employee_id
+  </select>
+  
+  <insert id="insertEmployee" parameterType="co.prod.vo.EmpVO">
+  	<selectKey keyProperty="employeeId" resultType="int" order="BEFORE">
+        select employees_seq.nextval from dual
+     </selectKey>
+     insert into employees (employee_id, first_name, last_name, email, job_id, hire_date, salary)
+     values (#{employeeId}, #{firstName}, #{lastName}, #{email}, 'IT_PROG', #{hireDate}, #{salary})
+  </insert>
+  
+  <delete id="delteEmployee" parameterType="int">
+  	delete employees where employee_id=#{employeeId}
+  </delete>
 
 </mapper>
